@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package logging.v2;
+option go_package = "loggingv2";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+message Event {
+  enum EventType {
+    TYPE_UNKNOWN = 0;
+    TYPE_TWEET   = 1;
+    TYPE_RETWEET = 2;
+    TYPE_FOLLOW  = 3;
+    TYPE_LIKE    = 4;
+    TYPE_REMOVE  = 5;
+    TYPE_BLOCK   = 6;
+  }
+  enum EventSource {
+    SOURCE_UNKNOWN          = 0;
+    SOURCE_PRIVATE_TIMETIME = 1;
+    SOURCE_PUBLIC_TIMELINE  = 2;
+    SOURCE_OTHERS_TIMELINE  = 3;
+    SOURCE_EMBED            = 4;
+  }
+  enum UserAgent {
+    UA_UNKNOWN = 0;
+    UA_ANDROID = 1;
+    UA_IOS = 2;
+    UA_WEB = 3;
+    UA_THIRD_PARTY = 4;
+  }
+
+  uint64 id                              = 1;
+  google.protobuf.Timestamp event_at     = 2;
+  google.protobuf.Timestamp processed_at = 3;
+  EventType event_type                   = 4;
+  EventSource event_source               = 5;
+  uint64 user_id                         = 6;
+  UserAgent user_agent                   = 7;
+  string value                           = 8;
+
+  google.protobuf.Any properties         = 100;
+}

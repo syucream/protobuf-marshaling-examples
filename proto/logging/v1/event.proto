@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package logging.v1;
+option go_package = "loggingv1";
+
+import "google/protobuf/timestamp.proto";
+
+message Event {
+  enum EventType {
+    UNKNOWN = 0;
+    TWEET   = 1;
+    FOLLOW  = 2;
+    LIKE    = 3;
+  }
+
+  uint64 id                            = 1;
+  google.protobuf.Timestamp created_at = 2;
+  EventType event_type                 = 3;
+  uint64 user_id                       = 4;
+  string value                         = 5;
+}
+
+message RichEvent {
+  enum EventType {
+    UNKNOWN = 0;
+    TWEET   = 1;
+    FOLLOW  = 2;
+    LIKE    = 3;
+  }
+
+  uint64 id                            = 1;
+  google.protobuf.Timestamp created_at = 2;
+  EventType event_type                 = 3;
+  uint64 user_id                       = 4;
+  string value                         = 5;
+
+  string url                           = 10;
+  uint64 reply_to                      = 11;
+}
