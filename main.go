@@ -166,10 +166,6 @@ func handleAny() {
 }
 
 func main() {
-	fmt.Println("Check marshaled size : ")
-	checkSize()
-	fmt.Println("")
-
 	fmt.Println("Check handling between messages might be compatible : ")
 	fmt.Println("v1 -> v1.5")
 	handleBetweenV1AndV1_5()
@@ -186,4 +182,8 @@ func main() {
 
 	fmt.Println("Check handling Any : ")
 	handleAny()
+	fmt.Println("")
+
+	fmt.Println("Check marshaled size w/ Any : ")
+	checkSize()
 }
